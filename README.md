@@ -1,63 +1,85 @@
-# Azure Cloud SOC — Purple Team Lab
+# 🛡️ Azure Cloud SOC — Purple Team Lab
 
-A cloud-native Security Operations Center built on Microsoft Azure, combining
-offensive and defensive security end to end: a live honeypot that detected real
-internet attacks, detection engineering in Microsoft Sentinel, web-app penetration
-testing against OWASP Juice Shop, and an Azure WAF whose logs feed back into the
-same SOC.
+> A cloud-native Security Operations Center on Microsoft Azure that detects **real internet attacks** and defends a web app with a WAF — built to demonstrate the full **detect-and-respond loop** where red team and blue team become one system.
 
-> Built to demonstrate a full detect-and-respond loop where every attack I run
-> generates telemetry the SOC can detect — the point where red team and blue team
-> become one system.
+![Azure](https://img.shields.io/badge/Microsoft-Azure-0078D4?logo=microsoftazure&logoColor=white)
+![Sentinel](https://img.shields.io/badge/Microsoft-Sentinel-0078D4?logo=microsoft&logoColor=white)
+![KQL](https://img.shields.io/badge/Language-KQL-blue)
+![MITRE](https://img.shields.io/badge/MITRE-ATT%26CK-red)
 
-## Architecture
+---
+
+## 🎥 Demos
+
+### WAF blocks a SQL injection in real time
+A live `' OR 1=1 --` against the login form is stopped with **403 Forbidden** before it reaches the app.
+
+![WAF blocks SQLi](media/waf-blocks-sqli.gif)
+
+### Real-world attacks caught by the WAF
+Querying `AGWFirewallLogs` shows live internet attackers blocked by the OWASP Core Rule Set — path traversal, PHP injection, and SQL injection, all matched and blocked.
+
+![WAF firewall logs](media/waf-firewall-logs.gif)
+
+### Brute-force detection firing in Microsoft Sentinel
+A scheduled analytics rule detects RDP brute-force: external IPs spraying admin usernames (one source tried 12+ per 10-minute window).
+
+![Sentinel brute-force detection](media/sentinel-bruteforce.gif)
+
+---
+
+## 🧭 Architecture
 
 ![Architecture](diagrams/architecture.png)
 
-Two attack surfaces feed one SOC:
-- A Windows honeypot (exposed RDP) → host/identity detections
-- A WAF-protected web app (OWASP Juice Shop) → web-attack detections
+**Two attack surfaces feed one SOC:**
+- 🪤 A Windows honeypot (exposed RDP) → host/identity detections
+- 🌐 A WAF-protected web app (OWASP Juice Shop) → web-attack detections
 
 Both stream into a single Log Analytics workspace and Microsoft Sentinel.
 
-## What I built
+---
 
-**Blue Team — Detection & Response**
+## 🔵 Blue Team — Detection & Response
 - Deployed a Windows 10 honeypot with RDP exposed to the internet
 - Connected it to Microsoft Sentinel via the Azure Monitor Agent (AMA) + a Data Collection Rule
-- Caught real RDP brute-force attacks within the first hour (EventID 4625)
-- Validated attacker IPs in VirusTotal and built a GeoIP attack map of global traffic
-- Engineered tuned, MITRE ATT&CK–mapped analytics rules that auto-generated incidents
+- Caught **real RDP brute-force attacks** within the first hour (EventID 4625)
+- Validated attacker IPs in VirusTotal and built a **GeoIP attack map** of global traffic
+- Engineered tuned, **MITRE ATT&CK-mapped** analytics rules that auto-generated incidents
 - Worked the incident queue as an analyst (triage → investigate → classify → close)
 
-**Red Team — Offensive Testing & WAF Defense**
+## 🔴 Red Team — Offensive Testing & WAF Defense
 - Deployed OWASP Juice Shop as an Azure Container Instance
-- SQL injection authentication bypass (`' OR 1=1 --`) → logged in as admin
-- Cross-Site Scripting (XSS) via the search field
-- Placed an Azure Application Gateway WAF (OWASP CRS) in front in Prevention mode
-- Re-ran the attacks → blocked with 403 Forbidden
-- Routed WAF logs into the same SOC and hunted the blocked attacks in `AGWFirewallLogs`
-
-## Detection rules (KQL)
-
-See the [`kql/`](kql/) folder. Highlights:
-- RDP brute-force detection (failed logons grouped by source IP) — MITRE T1110.001
-- Successful-logon "breach alarm" (tuned to exclude service/machine noise) — MITRE T1078
-- GeoIP enrichment for the attack map
-- WAF attack hunting on `AGWFirewallLogs`
-
-## Key lessons
-- Detection is about tuning, not volume — a naive `contains "success"` rule drowns
-  you in false positives; filtering on EventID, LogonType, and source IP makes
-  alerts meaningful.
-- Context matters — distinguishing real attacker IPs from Azure platform traffic,
-  and a real breach from an expected admin login, is the core of triage.
-- Offense and defense are one system — the attacks generated the telemetry the SOC
-  detected, closing the red/blue loop.
-
-## Full write-up
-[Presentation (PDF)](presentation/Azure_SOC_Project.pdf)
+- **SQL injection** authentication bypass (`' OR 1=1 --`) → logged in as admin
+- **Cross-Site Scripting (XSS)** via the search field
+- Placed an Azure Application Gateway **WAF (OWASP CRS)** in front, in Prevention mode
+- Re-ran the attacks → blocked with **403 Forbidden**
+- Routed WAF logs into the same SOC and hunted attacks in `AGWFirewallLogs`
 
 ---
-**Abdulrahman** — Penetration Tester | Cybersecurity Analyst
-LinkedIn: [@d7meealz](https://linkedin.com/in/d7meealz) · Medium: [@d7meealz](https://medium.com/@d7meealz)
+
+## 🔍 Detection Rules (KQL)
+See the [`kql/`](kql/) folder:
+| Rule | Detects | MITRE |
+|------|---------|-------|
+| RDP brute-force | Failed logons (4625) grouped by source IP | T1110.001 |
+| Successful logon | Real network/RDP logon (tuned to exclude noise) | T1078 |
+| GeoIP attack map | Enriches attacker IPs with location | — |
+| WAF attack hunt | Matched attacks in `AGWFirewallLogs` | — |
+
+---
+
+## 💡 Key Lessons
+- **Detection is about tuning, not volume** — a naive `contains "success"` rule drowns you in false positives; filtering on EventID, LogonType, and source IP makes alerts meaningful.
+- **Context matters** — distinguishing real attacker IPs from Azure platform traffic, and a real breach from an expected admin login, is the core of triage.
+- **Offense and defense are one system** — every attack generated telemetry the SOC detected, closing the red/blue loop.
+
+---
+
+## 📄 Full Write-up
+[📑 Presentation (PDF)](presentation/Azure_SOC_Project.pdf)
+
+---
+
+**Abdulrahman Alzahrani** — Penetration Tester | Cybersecurity Analyst
+🔗 [LinkedIn](https://linkedin.com/in/d7meealz) · ✍️ [Medium](https://medium.com/@d7meealz)
