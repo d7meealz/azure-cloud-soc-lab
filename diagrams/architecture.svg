@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 1000" font-family="DejaVu Sans, Segoe UI, Arial, sans-serif">
+  <defs>
+    <marker id="aRed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#D0021B"/></marker>
+    <marker id="aBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1F6FB8"/></marker>
+    <marker id="aGray" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5B6570"/></marker>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="1680" height="1000" fill="#F7F8FA"/>
+
+  <!-- title -->
+  <text x="840" y="56" text-anchor="middle" font-size="32" font-weight="700" fill="#1F2933">Azure Cloud SOC — Purple Team Lab</text>
+  <text x="840" y="90" text-anchor="middle" font-size="17" fill="#5B6570">Two attack surfaces feed one SOC  ·  detection engineering, incident response, and WAF defense</text>
+
+  <!-- Azure container -->
+  <rect x="270" y="150" width="1120" height="700" rx="18" fill="#EAF3FC" stroke="#4A90D9" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="292" y="184" font-size="18" font-weight="700" fill="#175FA6">Microsoft Azure</text>
+
+  <!-- ============ Threat actors (external) ============ -->
+  <g>
+    <rect x="45" y="235" width="195" height="78" rx="10" fill="#FDECEC" stroke="#C0392B" stroke-width="1.5"/>
+    <text x="142" y="270" text-anchor="middle" font-size="16" font-weight="700" fill="#922B21">Internet Attackers</text>
+    <text x="142" y="293" text-anchor="middle" font-size="12.5" fill="#B14237">RDP brute-force (botnets)</text>
+  </g>
+  <g>
+    <rect x="45" y="455" width="195" height="78" rx="10" fill="#FDECEC" stroke="#C0392B" stroke-width="1.5"/>
+    <text x="142" y="490" text-anchor="middle" font-size="16" font-weight="700" fill="#922B21">Penetration Tester</text>
+    <text x="142" y="513" text-anchor="middle" font-size="12.5" fill="#B14237">Kali · Burp Suite</text>
+  </g>
+
+  <!-- ============ Azure attack surface ============ -->
+  <g>
+    <rect x="300" y="235" width="235" height="78" rx="10" fill="#FDEEE6" stroke="#D35400" stroke-width="1.5"/>
+    <text x="417" y="270" text-anchor="middle" font-size="16" font-weight="700" fill="#9C3D00">Windows 10 Honeypot VM</text>
+    <text x="417" y="293" text-anchor="middle" font-size="12.5" fill="#B5571A">Exposed RDP :3389 (NSG)</text>
+  </g>
+  <g>
+    <rect x="300" y="415" width="235" height="78" rx="10" fill="#FDEEE6" stroke="#D35400" stroke-width="1.5"/>
+    <text x="417" y="450" text-anchor="middle" font-size="16" font-weight="700" fill="#9C3D00">Application Gateway (WAF)</text>
+    <text x="417" y="473" text-anchor="middle" font-size="12.5" fill="#B5571A">OWASP CRS · Prevention</text>
+  </g>
+  <g>
+    <rect x="300" y="540" width="235" height="78" rx="10" fill="#FDEEE6" stroke="#D35400" stroke-width="1.5"/>
+    <text x="417" y="575" text-anchor="middle" font-size="16" font-weight="700" fill="#9C3D00">OWASP Juice Shop</text>
+    <text x="417" y="598" text-anchor="middle" font-size="12.5" fill="#B5571A">Azure Container Instance</text>
+  </g>
+
+  <!-- ============ Telemetry pipeline ============ -->
+  <g>
+    <rect x="600" y="320" width="250" height="92" rx="10" fill="#E8F1FB" stroke="#1F6FB8" stroke-width="1.5"/>
+    <text x="725" y="358" text-anchor="middle" font-size="16" font-weight="700" fill="#14507F">Log Analytics Workspace</text>
+    <text x="725" y="382" text-anchor="middle" font-size="12.5" fill="#2A6FA8">SOC-LogAnalytics</text>
+  </g>
+  <g>
+    <rect x="600" y="470" width="250" height="78" rx="10" fill="#EEEAF9" stroke="#6C3FC5" stroke-width="1.5"/>
+    <text x="725" y="505" text-anchor="middle" font-size="16" font-weight="700" fill="#4A2A86">Microsoft Sentinel</text>
+    <text x="725" y="528" text-anchor="middle" font-size="12.5" fill="#6A4BB0">SIEM · analytics rules</text>
+  </g>
+  <g>
+    <rect x="600" y="600" width="250" height="70" rx="10" fill="#E4F4F2" stroke="#138D75" stroke-width="1.5"/>
+    <text x="725" y="632" text-anchor="middle" font-size="16" font-weight="700" fill="#0B5345">Microsoft Defender</text>
+    <text x="725" y="653" text-anchor="middle" font-size="12.5" fill="#0E7C66">Unified SOC portal</text>
+  </g>
+
+  <!-- ============ SOC outputs ============ -->
+  <g>
+    <rect x="910" y="300" width="440" height="80" rx="10" fill="#FEF5E1" stroke="#C9890A" stroke-width="1.5"/>
+    <text x="1130" y="335" text-anchor="middle" font-size="16" font-weight="700" fill="#8A5B00">Detection Rules</text>
+    <text x="1130" y="358" text-anchor="middle" font-size="12.5" fill="#A56F12">KQL · MITRE ATT&amp;CK (T1110.001 / T1078)</text>
+  </g>
+  <g>
+    <rect x="910" y="420" width="440" height="80" rx="10" fill="#FEF5E1" stroke="#C9890A" stroke-width="1.5"/>
+    <text x="1130" y="455" text-anchor="middle" font-size="16" font-weight="700" fill="#8A5B00">Incidents &amp; Response</text>
+    <text x="1130" y="478" text-anchor="middle" font-size="12.5" fill="#A56F12">triage → investigate → classify → close</text>
+  </g>
+  <g>
+    <rect x="910" y="540" width="440" height="80" rx="10" fill="#FEF5E1" stroke="#C9890A" stroke-width="1.5"/>
+    <text x="1130" y="575" text-anchor="middle" font-size="16" font-weight="700" fill="#8A5B00">GeoIP Attack Map</text>
+    <text x="1130" y="598" text-anchor="middle" font-size="12.5" fill="#A56F12">global attacker geolocation</text>
+  </g>
+
+  <!-- ============ ATTACK flows (red) ============ -->
+  <path d="M240,274 L296,274" fill="none" stroke="#D0021B" stroke-width="2.2" marker-end="url(#aRed)"/>
+  <path d="M240,494 L296,458" fill="none" stroke="#D0021B" stroke-width="2.2" marker-end="url(#aRed)"/>
+
+  <!-- WAF -> Juice (forward / block) -->
+  <path d="M417,495 L417,536" fill="none" stroke="#5B6570" stroke-width="2" marker-end="url(#aGray)"/>
+  <text x="427" y="522" font-size="11" fill="#5B6570">403 / forward</text>
+
+  <!-- ============ TELEMETRY flows (blue dashed) ============ -->
+  <path d="M537,278 L596,348" fill="none" stroke="#1F6FB8" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#aBlue)"/>
+  <text x="540" y="312" font-size="11" fill="#1F6FB8">AMA agent</text>
+  <path d="M537,452 L596,392" fill="none" stroke="#1F6FB8" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#aBlue)"/>
+  <text x="538" y="446" font-size="11" fill="#1F6FB8">Diag. Settings</text>
+
+  <!-- LAW -> Sentinel -->
+  <path d="M725,412 L725,466" fill="none" stroke="#1F6FB8" stroke-width="2.2" marker-end="url(#aBlue)"/>
+  <!-- Sentinel <-> Defender -->
+  <path d="M725,548 L725,596" fill="none" stroke="#5B6570" stroke-width="2" marker-end="url(#aGray)"/>
+
+  <!-- ============ OUTPUT flows (from Sentinel) ============ -->
+  <path d="M852,496 L906,342" fill="none" stroke="#6C3FC5" stroke-width="2" marker-end="url(#aGray)"/>
+  <path d="M852,509 L906,460" fill="none" stroke="#6C3FC5" stroke-width="2" marker-end="url(#aGray)"/>
+  <path d="M852,522 L906,578" fill="none" stroke="#6C3FC5" stroke-width="2" marker-end="url(#aGray)"/>
+
+  <!-- ============ Legend ============ -->
+  <line x1="60" y1="888" x2="1620" y2="888" stroke="#D8DCE1" stroke-width="1"/>
+  <g font-size="13.5" fill="#3A4450">
+    <rect x="60"  y="912" width="16" height="16" rx="3" fill="#FDECEC" stroke="#C0392B"/><text x="84"  y="925">External attacker</text>
+    <rect x="270" y="912" width="16" height="16" rx="3" fill="#FDEEE6" stroke="#D35400"/><text x="294" y="925">Azure attack surface</text>
+    <rect x="510" y="912" width="16" height="16" rx="3" fill="#E8F1FB" stroke="#1F6FB8"/><text x="534" y="925">Log Analytics</text>
+    <rect x="700" y="912" width="16" height="16" rx="3" fill="#EEEAF9" stroke="#6C3FC5"/><text x="724" y="925">SIEM (Sentinel)</text>
+    <rect x="905" y="912" width="16" height="16" rx="3" fill="#E4F4F2" stroke="#138D75"/><text x="929" y="925">Defender</text>
+    <rect x="1060" y="912" width="16" height="16" rx="3" fill="#FEF5E1" stroke="#C9890A"/><text x="1084" y="925">SOC output</text>
+  </g>
+  <g font-size="13">
+    <line x1="60" y1="958" x2="100" y2="958" stroke="#D0021B" stroke-width="2.4" marker-end="url(#aRed)"/>
+    <text x="110" y="962" fill="#922B21">attack traffic</text>
+    <line x1="270" y1="958" x2="310" y2="958" stroke="#1F6FB8" stroke-width="2.4" stroke-dasharray="6 4" marker-end="url(#aBlue)"/>
+    <text x="320" y="962" fill="#14507F">telemetry / logs</text>
+  </g>
+</svg>
