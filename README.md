@@ -59,5 +59,5 @@ See the [`kql/`](kql/) folder. Highlights:
 [Presentation (PDF)](presentation/Azure_SOC_Project.pdf)
 
 ---
-**Abdulrahman Alzahrani** — Penetration Tester | Cybersecurity Analyst
+**Abdulrahman** — Penetration Tester | Cybersecurity Analyst
 LinkedIn: [@d7meealz](https://linkedin.com/in/d7meealz) · Medium: [@d7meealz](https://medium.com/@d7meealz)
