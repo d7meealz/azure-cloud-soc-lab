@@ -1,1 +1,7 @@
-
+SecurityEvent
+| where EventID == 4624
+| where LogonType in (3, 10)
+| where AccountType == "User"
+| where Account !endswith "$"
+| where IpAddress != "" and IpAddress != "-"
+| project TimeGenerated, TargetUserName, IpAddress, LogonType
