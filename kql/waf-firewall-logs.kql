@@ -1,0 +1,4 @@
+AGWFirewallLogs
+| where Action == "Matched"
+| project TimeGenerated, ClientIp, RequestUri, RuleId, Message, DetailedData
+| order by TimeGenerated desc
